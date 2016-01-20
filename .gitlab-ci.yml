@@ -1,6 +1,6 @@
 variables:
   MIRROR_REPO: git@github.com:thm-projects/arsnova-backend.git
-  WAR_FILE: target/arsnova-backend.war
+  WAR_FILE: target/arsnova-backend-*.war
 
 stages:
   - analysis
@@ -72,3 +72,5 @@ tomcat_development:
     - staging
   script:
     - curl --upload-file $WAR_FILE https://$DEV_TOMCAT_USER:$DEV_TOMCAT_PASSWORD@$DEV_TOMCAT_HOST/manager/deploy?path=%2Fapi
+
+# CI test
