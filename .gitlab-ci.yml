@@ -24,15 +24,15 @@ sync_mirror:
     - git update-ref -d refs/tags/staging
     - git push --mirror $MIRROR_REPO
 
-sonar:
-  stage: analysis
-  only:
-    - master
-  tags:
-    - maven
-  allow_failure: true
-  script:
-    - mvn sonar:sonar
+#sonar:
+#  stage: analysis
+#  only:
+#    - master
+#  tags:
+#    - maven
+#  allow_failure: true
+#  script:
+#    - mvn sonar:sonar
 
 checkstyle:
   stage: analysis
