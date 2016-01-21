@@ -1,7 +1,7 @@
 variables:
   MIRROR_REPO: git@github.com:thm-projects/arsnova-backend.git
   WAR_FILE: target/arsnova-backend-*.war
-  MAVEN_OPTS=: -Dmaven.repo.local=.m2
+  MAVEN_OPTS: -Dmaven.repo.local=.m2
 
 stages:
   - analysis
