@@ -16,6 +16,9 @@ cache:
 sync_mirror:
   stage: synchronization
   when: always
+  except:
+    - production
+    - staging
   allow_failure: true
   script:
     - git clone --bare $CI_BUILD_REPO mirror.git
@@ -57,6 +60,7 @@ package:
       - $WAR_FILE
   script:
     - mvn package -DskipTests
+    - ls -la
 
 tomcat_production:
   stage: deploy
