@@ -44,9 +44,9 @@ checkstyle:
     - maven
   script:
     - ls -la
-    - ls -la .m2/
+    - ls -la .m2/ || true
     - ls -la ~
-    - ls -la ~/.m2/
+    - ls -la ~/.m2/ || true
     - env
     - mvn checkstyle:checkstyle
 
