@@ -1,7 +1,6 @@
 variables:
   MIRROR_REPO: git@github.com:thm-projects/arsnova-backend.git
   WAR_FILE: target/arsnova-backend-*.war
-  MAVEN_OPTS: -Dmaven.repo.local=.m2
 
 stages:
   - analysis
@@ -28,26 +27,21 @@ sync_mirror:
     - git update-ref -d refs/tags/staging
     - git push --mirror $MIRROR_REPO
 
-#sonar:
-#  stage: analysis
-#  only:
-#    - master
-#  tags:
-#    - maven
-#  allow_failure: true
-#  script:
-#    - mvn sonar:sonar
+sonar:
+  stage: analysis
+  only:
+    - master
+  tags:
+    - maven
+  allow_failure: true
+  script:
+    - mvn sonar:sonar
 
 checkstyle:
   stage: analysis
   tags:
     - maven
   script:
-    - ls -la
-    - ls -la .m2/ || true
-    - ls -la ~
-    - ls -la ~/.m2/ || true
-    - env
     - mvn checkstyle:checkstyle
 
 test:
@@ -80,5 +74,3 @@ tomcat_development:
     - staging
   script:
     - curl --upload-file $WAR_FILE https://$DEV_TOMCAT_USER:$DEV_TOMCAT_PASSWORD@$DEV_TOMCAT_HOST/manager/deploy?path=%2Fapi
-
-# CI test 3
