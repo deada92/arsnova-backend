@@ -42,9 +42,8 @@ checkstyle:
   tags:
     - maven
   script:
-    - ls -la
     - ls -la ~
-    - ls -la /root/
+    - ls -la ~/.m2/
     - mvn checkstyle:checkstyle
 
 test:
