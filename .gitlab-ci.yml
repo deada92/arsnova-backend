@@ -1,6 +1,7 @@
 variables:
   MIRROR_REPO: git@github.com:thm-projects/arsnova-backend.git
   WAR_FILE: target/arsnova-backend-*.war
+  MAVEN_OPTS=: -Dmaven.repo.local=.m2
 
 stages:
   - analysis
@@ -11,7 +12,7 @@ stages:
 
 cache:
   paths:
-    - /root/.m2/
+    - .m2/
 
 sync_mirror:
   stage: synchronization
@@ -42,8 +43,11 @@ checkstyle:
   tags:
     - maven
   script:
+    - ls -la
+    - ls -la .m2/
     - ls -la ~
     - ls -la ~/.m2/
+    - env
     - mvn checkstyle:checkstyle
 
 test:
