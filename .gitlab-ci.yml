@@ -81,4 +81,4 @@ tomcat_development:
   script:
     - curl --upload-file $WAR_FILE https://$DEV_TOMCAT_USER:$DEV_TOMCAT_PASSWORD@$DEV_TOMCAT_HOST/manager/deploy?path=%2Fapi
 
-# CI test 2
+# CI test 3
