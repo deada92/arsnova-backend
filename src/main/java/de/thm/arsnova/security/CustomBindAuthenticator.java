@@ -124,11 +124,11 @@ public class CustomBindAuthenticator extends AbstractLdapAuthenticator {
 
 			logger.debug("Retrieving attributes for " + userDn + ": " + Arrays.toString(getUserAttributes()));
 
-			Attributes attrs = ctx.getAttributes(userDn, getUserAttributes());
+			//Attributes attrs = ctx.getAttributes(userDn, getUserAttributes());
 
-			logger.debug("Attributes retrieved: " + attrs.size());
+			//logger.debug("Attributes retrieved: " + attrs.size());
 
-			DirContextAdapter result = new DirContextAdapter(attrs, userDn,
+			DirContextAdapter result = new DirContextAdapter(null, userDn,
 					ctxSource.getBaseLdapPath());
 
 			if (ppolicy != null) {
@@ -137,7 +137,7 @@ public class CustomBindAuthenticator extends AbstractLdapAuthenticator {
 
 			return result;
 		}
-		catch (NamingException e) {
+		catch (Exception e) {
 			// This will be thrown if an invalid user name is used and the method may
 			// be called multiple times to try different names, so we trap the exception
 			// unless a subclass wishes to implement more specialized behaviour.
@@ -148,9 +148,6 @@ public class CustomBindAuthenticator extends AbstractLdapAuthenticator {
 			else {
 				throw e;
 			}
-		}
-		catch (javax.naming.NamingException e) {
-			throw LdapUtils.convertLdapException(e);
 		}
 		finally {
 			LdapUtils.closeContext(ctx);
