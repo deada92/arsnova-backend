@@ -270,7 +270,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Serv
 	public LdapAuthenticator ldapAuthenticator() throws Exception {
 		CustomBindAuthenticator authenticator = new CustomBindAuthenticator(ldapContextSource());
 		logger.debug("ldapUserAttributes1: {}", authenticator.getUserAttributes());
-		authenticator.setUserAttributes(new String[] {});
+		authenticator.setUserAttributes(new String[] {"1.1"});
 		logger.debug("ldapUserAttributes2: {}", authenticator.getUserAttributes());
 		if (!"".equals(ldapSearchFilter)) {
 			logger.debug("ldapSearch: {} {}", ldapSearchBase, ldapSearchFilter);
