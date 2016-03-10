@@ -25,6 +25,7 @@ import de.thm.arsnova.CasUserDetailsService;
 import de.thm.arsnova.LoginAuthenticationFailureHandler;
 import de.thm.arsnova.LoginAuthenticationSucessHandler;
 import de.thm.arsnova.security.ApplicationPermissionEvaluator;
+import de.thm.arsnova.security.CustomBindAuthenticator;
 import de.thm.arsnova.security.DbUserDetailsService;
 import org.jasig.cas.client.validation.Cas20ProxyTicketValidator;
 import org.scribe.up.provider.impl.FacebookProvider;
@@ -267,7 +268,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Serv
 
 	@Bean
 	public LdapAuthenticator ldapAuthenticator() throws Exception {
-		BindAuthenticator authenticator = new BindAuthenticator(ldapContextSource());
+		CustomBindAuthenticator authenticator = new CustomBindAuthenticator(ldapContextSource());
+		logger.debug("ldapUserAttributes1: {}", authenticator.getUserAttributes());
+		authenticator.setUserAttributes(new String[] {"1.1"});
+		logger.debug("ldapUserAttributes2: {}", authenticator.getUserAttributes());
 		if (!"".equals(ldapSearchFilter)) {
 			logger.debug("ldapSearch: {} {}", ldapSearchBase, ldapSearchFilter);
 			authenticator.setUserSearch(new FilterBasedLdapUserSearch(ldapSearchBase, ldapSearchFilter, ldapContextSource()));
